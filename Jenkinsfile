@@ -22,7 +22,7 @@ pipeline {
           }
 	stage ('Deploy') {
 		steps {
-			sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
+			sh '/usr/share/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
 		}
 	}
 	stage ('Release') {
@@ -32,7 +32,7 @@ pipeline {
 	}
 	stage ('DB Migration') {
 		steps {
-			sh '/opt/maven/bin/mvn clean flyway:migrate'
+			sh '/usr/share/maven/bin/mvn clean flyway:migrate'
 		}
 	}
 }
