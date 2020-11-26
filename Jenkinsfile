@@ -8,7 +8,7 @@ pipeline {
 	}
 	stage('Build') {
 		steps {
-			withSonarQubeEnv('sonar_scanner') {
+			withSonarQubeEnv('sonar-scanner') {
 				sh '/usr/share/maven/bin/mvn clean verify sonar:sonar -Dmaven.test.skip=true'
 			}
 		}
