@@ -28,20 +28,20 @@ pipeline {
 	}
 		
 		
-	stage ('Upload War To Nexus'){
-		steps{
-			  nexusArtifactUploader artifacts: [
-  [             artifactId: 'mediclaim', 
-               classifier: '', file: 'target/mediclaim-0.0.13-SNAPSHOT.jar', type: 'jar']
-  ], 
-               credentialsId: 'nexus3', groupId: 'org.springframework.boot', 
-               nexusUrl: '3.21.43.147:8081', 
-               nexusVersion: 'nexus3', protocol: 'http', 
-               repository: 'simpleapp-release', 
-               version: '2.2.2.RELEASE'
-			
-		}	
-	}
+	
+       stage ('nexus') {
+            steps {
+                node ("setup") {
+                    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'sampleapp-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '.jar', filePath: 'target/mediclaim-0.0.13-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'mediclaim', groupId: 'org.springframework.boot', packaging: 'jar', version: '2.2.2.RELEASE']]]
+                }
+            }
+       }
+		
+		
+		
+		
+		
+		
 	stage ('Release') {
 		steps {
 			sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java -jar $WORKSPACE/target/*.jar &'
