@@ -3,7 +3,7 @@ pipeline {
 	stages {
       stage('Git Checkout') {
          steps {
-            git 'https://github.com/lokeshgit111/mediclaim.git'
+            git credentialsId: 'e64d269b-6890-4f5b-bb3f-37a725e080ab', url: 'https://github.com/lokeshgit111/mediclaim.git'
 		}
 	}
 	stage('Build') {
