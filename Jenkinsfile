@@ -21,11 +21,11 @@ pipeline {
               }
             }
           }
-	//stage ('Deploy') {
-	//	steps {
-	//		sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
-	//	}
-	//}
+	stage ('Deploy') {
+		steps {
+			sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
+		}
+	}
 		
 		
 	stage ('Upload War To Nexus'){
