@@ -21,6 +21,22 @@ pipeline {
               }
             }
           }
+		
+		
+		
+	stage ('nexus') {
+            steps {
+                node ("setup") {
+                    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'sampleapp-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '.jar', filePath: 'target/mediclaim-0.0.13-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'mediclaim', groupId: 'org.springframework.boot', packaging: 'jar', version: '2.2.2.RELEASE']]]
+                }
+            }
+       }
+	
+		
+		
+		
+		
+		
 	stage ('Deploy') {
 		steps {
 			sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
@@ -29,14 +45,7 @@ pipeline {
 		
 		
 	
-       stage ('nexus') {
-            steps {
-                node ("setup") {
-                    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'sampleapp-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '.jar', filePath: 'target/mediclaim-0.0.13-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'mediclaim', groupId: 'org.springframework.boot', packaging: 'jar', version: '2.2.2.RELEASE']]]
-                }
-            }
-       }
-		
+	
 		
 		
 		
