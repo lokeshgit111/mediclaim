@@ -126,7 +126,7 @@
         		    <artifactId>flyway-maven-plugin</artifactId>
 			    <version>6.4.4</version>
 			    <configuration>
-                              <url>jdbc:mysql:20.51.189.249:3306</url>
+                              <url>jdbc:mysql:3.139.238.117:3306</url>
                               <user>claimuser1</user>
 		              <password>H@ckath0n</password>
 			      <schemas>
@@ -139,7 +139,7 @@
 		<artifactId>maven-release-plugin</artifactId>
 		<version>3.0.0-M1</version>
                 <configuration>
-		    <tagBase>https://github.com/salagarsprabu/mediclaim.git/tag</tagBase>
+		    <tagBase>https://github.com/lokeshgit111/mediclaim.git/tag</tagBase>
                      <releaseProfiles>release</releaseProfiles>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <pushChanges>false</pushChanges>
