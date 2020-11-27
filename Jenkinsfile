@@ -21,10 +21,26 @@ pipeline {
               }
             }
           }
-	stage ('Deploy') {
-		steps {
-			sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
-		}
+	//stage ('Deploy') {
+	//	steps {
+	//		sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
+	//	}
+	//}
+		
+		
+	stage ('Upload War To Nexus'){
+		steps{
+			  nexusArtifactUploader artifacts: [
+  [             artifactId: 'mediclaim', 
+               classifier: '', file: 'target/mediclaim-0.0.13-SNAPSHOT.jar', type: 'jar']
+  ], 
+               credentialsId: 'nexus3', groupId: 'org.springframework.boot', 
+               nexusUrl: '3.21.43.147:8081', 
+               nexusVersion: 'nexus3', protocol: 'http', 
+               repository: 'simpleapp-release', 
+               version: '2.2.2.RELEASE'
+			
+		}	
 	}
 	stage ('Release') {
 		steps {
