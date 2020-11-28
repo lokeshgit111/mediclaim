@@ -9,13 +9,17 @@
 	</parent>
 	<groupId>com.strikers</groupId>
 	<artifactId>mediclaim</artifactId>
-	<version>0.0.13-SNAPSHOT</version>
+	<version>0.0.17-SNAPSHOT</version>
 	<name>mediclaim</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.coverage.exclusions>**mediclaim/*,**/config/*,**/entity/*,**/dto/*,**/repository/*,**/exception/*,**/util/*</sonar.coverage.exclusions>
+	        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <sonar.host.url>http://3.15.1.80:9000</sonar.host.url>
+                <sonar.login>admin</sonar.login>
+                <sonar.password>admin</sonar.password>         
 	</properties>
 
 	<dependencies>
@@ -54,11 +58,7 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>sonar-maven-plugin</artifactId>
-			<version>3.6.3</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -74,22 +74,23 @@
 		<artifactId>flyway-core</artifactId>
 		<version>6.3.2</version>
 		</dependency>
-	</dependencies>
+	</dependencies>	
+
 	<scm>
-        <connection>scm:https://github.com/lokeshgit111/mediclaim.git</connection>
-        <url>https://github.com/lokeshgit111/mediclaim.git</url>
-        <developerConnection>scm:git:https://github.com/lokeshgit111/mediclaim.git</developerConnection>
+        <connection>scm:https://github.com/salagarsprabu/mediclaim.git</connection>
+        <url>https://github.com/baikunthar/mediclaim.git</url>
+        <developerConnection>scm:git:https://github.com/salagarsprabu/mediclaim.git</developerConnection>
       <tag>HEAD</tag>
       </scm>
 	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>http://3.139.86.190:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-             <id>nexus-snapshots</id>
+	   <snapshotRepository>
+	     <id>nexus</id>			
+	     <url>http://3.139.86.190:8081/nexus/content/repositories/snapshots</url>
+	   </snapshotRepository>
+	   <repository>
+             <id>nexus</id>
              <url>http://3.139.86.190:8081/nexus/content/repositories/releases</url>
-       	     </repository>
+       	    </repository>
 	</distributionManagement>
 	<build>
 		<plugins>
@@ -117,11 +118,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-                            <groupId>org.eclipse.jetty</groupId>
-                             <artifactId>jetty-maven-plugin</artifactId>
-                             <version>9.2.11.v20150529</version>
-                         </plugin>
-			<plugin>
 			    <groupId>org.flywaydb</groupId>
         		    <artifactId>flyway-maven-plugin</artifactId>
 			    <version>6.4.4</version>
@@ -139,7 +135,7 @@
 		<artifactId>maven-release-plugin</artifactId>
 		<version>3.0.0-M1</version>
                 <configuration>
-		    <tagBase>https://github.com/lokeshgit111/mediclaim.git/tag</tagBase>
+		    <tagBase>https://github.com/salagarsprabu/mediclaim.git/tag</tagBase>
                      <releaseProfiles>release</releaseProfiles>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <pushChanges>false</pushChanges>
