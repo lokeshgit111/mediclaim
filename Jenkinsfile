@@ -8,12 +8,13 @@ pipeline {
 	}
 	stage('Build') {
 		steps {
-			withSonarQubeEnv('sonar-webhook') {
+			withSonarQubeEnv('sonar') {
 				sh '/opt/maven/bin/mvn clean verify sonar:sonar -Dmaven.test.skip=true'
 			}
 		}
 	}
 	stage("Quality Gate") {
+	          
             steps {
 		    sh "sleep 15"
               timeout(time: 2, unit: 'MINUTES') {
@@ -21,33 +22,26 @@ pipeline {
               }
             }
           }
-				
-		
 	stage ('Deploy') {
 		steps {
 			sh '/opt/maven/bin/mvn clean deploy -Dmaven.test.skip=true'
 		}
 	}
-		
-		
-	
-		
-		
 	stage ('Release') {
 		steps {
 			sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java -jar $WORKSPACE/target/*.jar &'
 		}
 	}
 	//stage ('DB Migration') {
-	//	steps {
-	//		sh '/usr/share/maven/bin/mvn clean flyway:migrate'
-		}
-	}
-//}
+		//steps {
+			//sh '/opt/maven/bin/mvn clean flyway:migrate'
+	//	}
+//	}
+}
 	post {
         always {
             emailext body: "${currentBuild.currentResult}: Project Name : ${env.JOB_NAME} Build ID : ${env.BUILD_NUMBER}\n\n Approval Link :  ${env.BUILD_URL}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 
-//}
+}
