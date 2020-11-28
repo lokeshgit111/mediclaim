@@ -133,7 +133,7 @@
 		<plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-release-plugin</artifactId>
-		<version>3.0.0-M1</version>
+		<version>3.6.3-M1</version>
                 <configuration>
 		    <tagBase>https://github.com/salagarsprabu/mediclaim.git/tag</tagBase>
                      <releaseProfiles>release</releaseProfiles>
